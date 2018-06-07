@@ -45,7 +45,7 @@ the code of the model. It also supports loading multiple datasets at the
 same time, which is useful if the objects you want to detect are not 
 all available in one dataset. 
 
-See examples in `samples/shapes/train_shapes.ipynb`, `samples/coco/coco.py`, `samples/balloon/balloon.py`, and `samples/nucleus/nucleus.py`.
+
 
 
 
