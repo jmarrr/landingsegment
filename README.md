@@ -8,6 +8,11 @@
 
 * [process_video.py](process_video.py) This file is used to process video and apply segmentation 
 
+* To test on a video
+   ```
+    python process_video.py --video={PATH TO VIDEO}
+    ``` 
+
 ## Requirements
 * Python 3.4, TensorFlow 1.3, Keras 2.0.8 and other common packages listed in `requirements.txt`.
 
