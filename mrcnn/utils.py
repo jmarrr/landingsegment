@@ -558,7 +558,22 @@ def minimize_mask(bbox, mask, mini_shape):
         mini_mask[:, :, i] = np.where(m >= 128, 1, 0)
     return mini_mask
 
+def expand_mask(bbox, mini_mask, image_shape):
+    """Resizes mini masks back to image size. Reverses the change
+    of minimize_mask().
 
+    See inspect_data.ipynb notebook for more details.
+    """
+    mask = np.zeros(image_shape[:2] + (mini_mask.shape[-1],), dtype=bool)
+    for i in range(mask.shape[-1]):
+        m = mini_mask[:, :, i]
+        y1, x1, y2, x2 = bbox[i][:4]
+        h = y2 - y1
+        w = x2 - x1
+        # Resize with bilinear interpolation
+        m = skimage.transform.resize(m, (h, w), order=1, mode="constant")
+        mask[y1:y2, x1:x2, i] = np.around(m).astype(np.bool)
+    return mask
 
 # TODO: Build and use this function to reduce code duplication
 def mold_mask(mask, config):

@@ -144,10 +144,10 @@ class LandingDataset(utils.Dataset):
             
             idlist =[]
             for i in range(len(class_ids)):
-                if class_ids[i]['safety'] == 'unsafe':
-                    idlist.append(2)
-                elif class_ids[i]['safety'] == 'safe':
+                if class_ids[i]['safety'] == 'safe':
                     idlist.append(1)
+                elif class_ids[i]['safety'] == 'unsafe':
+                    idlist.append(2)
             # load_mask() needs the image size to convert polygons to masks.
             # Unfortunately, VIA doesn't include it in JSON, so we must read
             # the image. This is only managable since the dataset is tiny.
@@ -164,10 +164,10 @@ class LandingDataset(utils.Dataset):
 
     def load_mask(self, image_id):
         """Generate instance masks for an image.
-       Returns:
-        masks: A bool array of shape [height, width, instance count] with
-            one mask per instance.
-        class_ids: a 1D array of class IDs of the instance masks.
+           Returns:
+            masks: A bool array of shape [height, width, instance count] with
+                one mask per instance.
+            class_ids: a 1D array of class IDs of the instance masks.
         """
         # If not a balloon dataset image, delegate to parent class.
         image_info = self.image_info[image_id]
